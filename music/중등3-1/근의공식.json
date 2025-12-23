@@ -1,0 +1,34 @@
+{
+  "title": "근의공식",
+  "grade": "중등3-1",
+  "artist": "인재의창",
+  "audioFile": "근의공식.mp3",
+  "slides": [
+    { "time": 0, "text": "이차방정식을 풀어보자!", "emoji": "🔢" },
+    {
+      "time": 4,
+      "text": "ax² + bx + c = 0",
+      "emoji": "📝",
+      "mathLatex": "ax^2 + bx + c = 0"
+    },
+    { "time": 10, "text": "근의 공식 나가신다!", "emoji": "🎤" },
+    { "time": 14, "text": "x = -b", "emoji": "1️⃣" },
+    {
+      "time": 18,
+      "text": "± 루트 b² - 4ac",
+      "emoji": "2️⃣",
+      "mathLatex": "x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}"
+    },
+    { "time": 25, "text": "나누기 2a!", "emoji": "3️⃣" },
+    {
+      "time": 30,
+      "text": "판별식 D = b² - 4ac",
+      "emoji": "💡",
+      "mathLatex": "D = b^2 - 4ac"
+    },
+    { "time": 38, "text": "D > 0 이면 서로 다른 두 실근!", "emoji": "✌️" },
+    { "time": 44, "text": "D = 0 이면 중근!", "emoji": "1️⃣" },
+    { "time": 48, "text": "D < 0 이면 실근 없음!", "emoji": "❌" },
+    { "time": 53, "text": "근의공식! 근의공식!", "emoji": "🏁" }
+  ]
+}

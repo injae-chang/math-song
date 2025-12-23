@@ -1,0 +1,62 @@
+{
+  "title": "곱셈공식",
+  "grade": "중등2-1",
+  "artist": "인재의창",
+  "audioFile": "곱셈공식.mp3",
+  "slides": [
+    { "time": 0, "text": "다항식의 곱을 빠르게!", "emoji": "🚀" },
+    { "time": 3, "text": "일일이 전개는 이제 그만", "emoji": "✋" },
+    { "time": 6, "text": "계산을 단번에 끝내주는", "emoji": "✨" },
+    { "time": 9, "text": "마법 같은 곱셈공식!", "emoji": "🎩" },
+    { "time": 13, "text": "첫째, 완전제곱식", "emoji": "1️⃣" },
+    {
+      "time": 15,
+      "text": "A 플러스 마이너스 B\n전체 제곱은 이렇게!",
+      "emoji": "📌",
+      "mathLatex": "\\left(a \\pm b\\right)^2"
+    },
+    {
+      "time": 19,
+      "text": "A제곱 플러스 마이너스 2AB\n플러스 B제곱!",
+      "emoji": "✅",
+      "mathLatex": "a^2 \\pm 2ab + b^2"
+    },
+    { "time": 25, "text": "둘째, 합차공식", "emoji": "2️⃣" },
+    {
+      "time": 27,
+      "text": "A 플러스 B, A 마이너스 B\n둘이 만나면 바로 이거!",
+      "emoji": "📌",
+      "mathLatex": "\\left(a+b\\right)\\left(a-b\\right)"
+    },
+    {
+      "time": 32,
+      "text": "A제곱 - B제곱!",
+      "emoji": "✅",
+      "mathLatex": "a^2-b^2"
+    },
+    { "time": 36, "text": "레벨 업! 공식 변형!", "emoji": "🆙" },
+    { "time": 38, "text": "실력을 한 단계 더 올려보자~", "emoji": "💪" },
+    {
+      "time": 41,
+      "text": "A제곱 + B제곱은\nA + B의 전체 제곱\n- 2AB!",
+      "emoji": "✍️",
+      "mathLatex": "a^2+b^2=\\left(a\\pm b\\right)^2 \\mp 2ab"
+    },
+    {
+      "time": 50,
+      "text": "A + B의 전체제곱은\nA - B의 전체제곱\n플러스 4AB!",
+      "emoji": "⚖️",
+      "mathLatex": "\\left(a+b\\right)^2=\\left(a-b\\right)^2+4ab"
+    },
+    {
+      "time": 57,
+      "text": "A - B의 전체제곱은\nA + B의 전체제곱\n마이너스 4AB!",
+      "emoji": "🔁",
+      "mathLatex": "\\left(a-b\\right)^2=\\left(a+b\\right)^2-4ab"
+    },
+    { "time": 64, "text": "복잡한 계산 단번에 해결!", "emoji": "🎓" },
+    { "time": 67, "text": "식의 구조를 한눈에 딱!", "emoji": "👀" },
+    { "time": 69, "text": "필수 계산 기술!", "emoji": "🛠️" },
+    { "time": 71, "text": "곱셈공식! 곱셈공식!", "emoji": "🏁" }
+  ]
+}

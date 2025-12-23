@@ -1,0 +1,52 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "수학 공식 암기송 데이터",
+  "type": "object",
+  "required": ["title", "grade", "artist", "audioFile", "slides"],
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "곡 제목"
+    },
+    "grade": {
+      "type": "string",
+      "description": "학년-학기 (예: 중등2-1)",
+      "pattern": "^(초등|중등)[1-6]-[12]$"
+    },
+    "artist": {
+      "type": "string",
+      "description": "아티스트/제작자명"
+    },
+    "audioFile": {
+      "type": "string",
+      "description": "오디오 파일명 (같은 폴더 내)"
+    },
+    "slides": {
+      "type": "array",
+      "description": "가사 슬라이드 배열",
+      "items": {
+        "type": "object",
+        "required": ["time", "text"],
+        "properties": {
+          "time": {
+            "type": "number",
+            "description": "시작 시간 (초)",
+            "minimum": 0
+          },
+          "text": {
+            "type": "string",
+            "description": "가사 텍스트"
+          },
+          "emoji": {
+            "type": "string",
+            "description": "이모지 (선택)"
+          },
+          "mathLatex": {
+            "type": "string",
+            "description": "수식 LaTeX (선택)"
+          }
+        }
+      }
+    }
+  }
+}

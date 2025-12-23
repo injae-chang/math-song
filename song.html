@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <title>수학 공식 암기송 | 인재의창</title>
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
+    ></script>
+    <script defer src="script.js"></script>
+  </head>
+
+  <body>
+    <div id="mv-container">
+      <!-- Collapse/Expand Toggle -->
+      <div id="nav-toggle">
+        <button id="toggle-btn" title="곡 선택 열기/닫기">⌄</button>
+      </div>
+
+      <!-- Current Track Display -->
+      <div id="current-track-bar">
+        <div class="track-name" id="bar-track-name">음원 미선택</div>
+        <div class="track-grade" id="bar-track-grade">곡을 선택해주세요</div>
+      </div>
+
+      <!-- Floating Navigation Panel -->
+      <div id="nav-panel">
+        <div class="nav-section">
+          <div class="nav-section-title">학교</div>
+          <div class="nav-tabs">
+            <button class="nav-tab active" data-school="초등">초등학교</button>
+            <button class="nav-tab" data-school="중등">중학교</button>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">학년</div>
+          <div class="filter-group" id="grade-buttons"></div>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">학기</div>
+          <div class="filter-group" id="semester-buttons">
+            <button class="filter-btn active" data-semester="1">1학기</button>
+            <button class="filter-btn" data-semester="2">2학기</button>
+          </div>
+        </div>
+
+        <div class="nav-section">
+          <div class="nav-section-title">노래</div>
+          <select id="song-select" class="song-select-panel"></select>
+        </div>
+      </div>
+
+      <!-- Content Area -->
+      <div id="content-area">
+        <div id="stage-container">
+          <div id="math-area">
+            <div id="emoji-area"></div>
+            <div id="math-display">
+              <span class="placeholder">수식이 여기에 표시됩니다</span>
+            </div>
+          </div>
+          <div id="lyrics-area">
+            <div id="lyrics-display">준비 완료! 곡을 선택하고 재생하세요.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div id="controls">
+        <div class="player-meta">
+          <div class="meta-left">
+            <div id="track-title">음원 미선택</div>
+            <div id="track-artist">곡을 선택해주세요</div>
+          </div>
+        </div>
+
+        <div class="progress-row">
+          <span id="time-current">--:--</span>
+          <div id="progress-container">
+            <div id="progress-bar"></div>
+          </div>
+          <span id="time-duration">--:--</span>
+        </div>
+
+        <div class="player-actions">
+          <button id="prev-btn" class="icon-btn" title="이전 곡">⏮</button>
+          <button id="play-btn" class="play-btn" title="재생/일시정지 (Space)">
+            ▶
+          </button>
+          <button id="next-btn" class="icon-btn" title="다음 곡">⏭</button>
+        </div>
+
+        <div class="volume-row">
+          <span class="volume-icon">🔈</span>
+          <div id="volume-container">
+            <div id="volume-bar"></div>
+          </div>
+          <span class="volume-icon">🔊</span>
+        </div>
+      </div>
+    </div>
+
+    <audio id="audio-player" preload="metadata"></audio>
+  </body>
+</html>
