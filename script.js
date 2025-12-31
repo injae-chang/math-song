@@ -21,13 +21,13 @@
     prevBtn: $('prev-btn'),
     nextBtn: $('next-btn'),
     songSelect: $('song-select'),
+    loadSongBtn: $('load-song-btn'),
     trackTitle: $('track-title'),
     trackArtist: $('track-artist'),
     barTrackName: $('bar-track-name'),
     barTrackGrade: $('bar-track-grade'),
     lyrics: $('lyrics-display'),
     math: $('math-display'),
-    emoji: $('emoji-area'),
     progressContainer: $('progress-container'),
     progressBar: $('progress-bar'),
     timeCurrent: $('time-current'),
@@ -38,6 +38,11 @@
     toggleBtn: $('toggle-btn'),
     volumeContainer: $('volume-container'),
     volumeBar: $('volume-bar'),
+    muteBtn: $('mute-btn'),
+    maxVolumeBtn: $('max-volume-btn'),
+    recordCard: $('record-card'),
+    flipHint: $('flip-hint'),
+    playerMeta: document.querySelector('.player-meta'),
   };
 
   const state = {
@@ -74,7 +79,6 @@
 
   function resetDisplay() {
     els.lyrics.textContent = '준비 완료!\n곡을 선택하고 재생하세요.';
-    els.emoji.textContent = '';
     els.math.innerHTML =
       '<span class="placeholder">수식이 여기에 표시됩니다</span>';
     els.math.classList.remove('active');
@@ -133,9 +137,6 @@
   function renderSlide(slide) {
     els.lyrics.textContent = slide.text;
     animateEnter(els.lyrics);
-
-    els.emoji.textContent = slide.emoji || '';
-    if (slide.emoji) animatePop(els.emoji);
 
     if (slide.mathLatex) {
       renderMathLatex(slide.mathLatex);
@@ -315,7 +316,8 @@
       opt.value = '';
       opt.textContent = '준비 중...';
       els.songSelect.appendChild(opt);
-      loadTrack(null);
+      // Only disable the load button - don't stop current playback
+      if (els.loadSongBtn) els.loadSongBtn.disabled = true;
       return;
     }
 
@@ -326,32 +328,104 @@
       els.songSelect.appendChild(opt);
     });
 
-    loadTrack(tracks[0], 0);
+    // Enable load song button when tracks exist
+    if (els.loadSongBtn) els.loadSongBtn.disabled = false;
+    // Don't auto-load the first track, wait for user to click play button
+  }
+
+  // Get all available tracks across all grades
+  function getAllAvailableTracks() {
+    const allTracks = [];
+    for (const [gradeKey, tracks] of Object.entries(TRACK_REGISTRY)) {
+      tracks.forEach((track, idx) => {
+        allTracks.push({
+          ...track,
+          gradeKey,
+          originalIndex: idx,
+        });
+      });
+    }
+    return allTracks;
+  }
+
+  // Find current track in all available tracks
+  function getCurrentGlobalTrackIndex() {
+    const allTracks = getAllAvailableTracks();
+    const currentGradeKey = getFullGrade();
+    return allTracks.findIndex(
+      (t) =>
+        t.gradeKey === currentGradeKey &&
+        t.originalIndex === state.currentTrackIndex
+    );
+  }
+
+  // Load track by global index
+  async function loadTrackByGlobalIndex(globalIndex) {
+    const allTracks = getAllAvailableTracks();
+    if (allTracks.length === 0) return;
+
+    // Wrap around
+    if (globalIndex < 0) globalIndex = allTracks.length - 1;
+    if (globalIndex >= allTracks.length) globalIndex = 0;
+
+    const track = allTracks[globalIndex];
+
+    // Parse gradeKey to update state (e.g., "중등1-1")
+    const match = track.gradeKey.match(/^(초등|중등)(\d)-(\d)$/);
+    if (match) {
+      state.school = match[1];
+      state.grade = Number(match[2]);
+      state.semester = Number(match[3]);
+
+      // Update UI to reflect new selection
+      document
+        .querySelectorAll('.nav-tab')
+        .forEach((t) =>
+          t.classList.toggle('active', t.dataset.school === state.school)
+        );
+      renderGradeButtons();
+      updateSongOptions();
+
+      // Set the song select value
+      els.songSelect.value = String(track.originalIndex);
+    }
+
+    await loadTrack(track, track.originalIndex);
   }
 
   function playPrevTrack() {
-    const tracks = getCurrentTracks();
-    if (tracks.length === 0) return;
+    // If current time is 1 second or more, restart current track
+    if (els.audio.currentTime >= 1) {
+      els.audio.currentTime = 0;
+      if (!state.isPlaying) play();
+      return;
+    }
 
-    let newIndex = state.currentTrackIndex - 1;
-    if (newIndex < 0) newIndex = tracks.length - 1;
+    // Otherwise, go to previous track
+    const allTracks = getAllAvailableTracks();
+    if (allTracks.length === 0) return;
 
-    els.songSelect.value = String(newIndex);
-    loadTrack(tracks[newIndex], newIndex).then(() => {
-      if (state.isPlaying || els.audio.currentTime > 0) play();
+    const currentGlobalIdx = getCurrentGlobalTrackIndex();
+    const newGlobalIdx =
+      currentGlobalIdx <= 0 ? allTracks.length - 1 : currentGlobalIdx - 1;
+
+    loadTrackByGlobalIndex(newGlobalIdx).then(() => {
+      play();
     });
   }
 
   function playNextTrack() {
-    const tracks = getCurrentTracks();
-    if (tracks.length === 0) return;
+    const allTracks = getAllAvailableTracks();
+    if (allTracks.length === 0) return;
 
-    let newIndex = state.currentTrackIndex + 1;
-    if (newIndex >= tracks.length) newIndex = 0;
+    const currentGlobalIdx = getCurrentGlobalTrackIndex();
+    const newGlobalIdx =
+      currentGlobalIdx < 0 || currentGlobalIdx >= allTracks.length - 1
+        ? 0
+        : currentGlobalIdx + 1;
 
-    els.songSelect.value = String(newIndex);
-    loadTrack(tracks[newIndex], newIndex).then(() => {
-      if (state.isPlaying || els.audio.currentTime > 0) play();
+    loadTrackByGlobalIndex(newGlobalIdx).then(() => {
+      play();
     });
   }
 
@@ -418,12 +492,21 @@
     // Toggle nav panel
     els.toggleBtn.addEventListener('click', toggleNavPanel);
 
+    // Player meta click - toggle nav panel
+    if (els.playerMeta) {
+      els.playerMeta.style.cursor = 'pointer';
+      els.playerMeta.addEventListener('click', () => {
+        toggleNavPanel();
+      });
+    }
+
     // Close panel when clicking outside
     document.addEventListener('click', (e) => {
       if (
         state.navOpen &&
         !els.navPanel.contains(e.target) &&
-        !els.toggleBtn.contains(e.target)
+        !els.toggleBtn.contains(e.target) &&
+        !(els.playerMeta && els.playerMeta.contains(e.target))
       ) {
         toggleNavPanel();
       }
@@ -457,12 +540,21 @@
         });
       });
 
-    // Song select
-    els.songSelect.addEventListener('change', () => {
-      const tracks = getCurrentTracks();
-      const idx = Number(els.songSelect.value);
-      if (tracks[idx]) loadTrack(tracks[idx], idx);
-    });
+    // Song select - don't auto-load on change, wait for play button
+    // Load song button in nav panel
+    if (els.loadSongBtn) {
+      els.loadSongBtn.addEventListener('click', () => {
+        const tracks = getCurrentTracks();
+        const idx = Number(els.songSelect.value);
+        if (tracks[idx]) {
+          loadTrack(tracks[idx], idx).then(() => {
+            play();
+            // Close nav panel after starting playback
+            if (state.navOpen) toggleNavPanel();
+          });
+        }
+      });
+    }
 
     // Player controls
     els.audio.addEventListener('timeupdate', updateTimeReadout);
@@ -488,6 +580,36 @@
         Math.min(1, (e.clientX - rect.left) / rect.width)
       );
       els.audio.volume = ratio;
+      updateVolumeBar();
+    });
+
+    // Mute button
+    els.muteBtn.addEventListener('click', () => {
+      els.audio.volume = 0;
+      updateVolumeBar();
+    });
+
+    // Flip interaction with dark mode toggle
+    if (els.recordCard) {
+      els.recordCard.addEventListener('click', () => {
+        els.recordCard.classList.toggle('flipped');
+        document.body.classList.toggle('dark-mode');
+      });
+    }
+
+    // Flip hint click handler
+    if (els.flipHint) {
+      els.flipHint.addEventListener('click', () => {
+        if (els.recordCard) {
+          els.recordCard.classList.toggle('flipped');
+          document.body.classList.toggle('dark-mode');
+        }
+      });
+    }
+
+    // Max volume button
+    els.maxVolumeBtn.addEventListener('click', () => {
+      els.audio.volume = 1;
       updateVolumeBar();
     });
 

@@ -9,8 +9,10 @@
     <title>수학 공식 암기송 | 인재의창</title>
 
     <link
-      href="https://fonts.googleapis.com/css2?family=Jua&display=swap"
       rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
     />
     <link
       rel="stylesheet"
@@ -27,16 +29,21 @@
 
   <body>
     <div id="mv-container">
-      <!-- Collapse/Expand Toggle -->
-      <div id="nav-toggle">
-        <button id="toggle-btn" title="곡 선택 열기/닫기">
-          <iconify-icon
-            icon="solar:alt-arrow-down-linear"
-            width="24"
-            height="24"
-          ></iconify-icon>
-        </button>
-      </div>
+      <!-- Header with Logo -->
+      <header id="app-header">
+        <div id="nav-toggle">
+          <button id="toggle-btn" title="곡 선택 열기/닫기">
+            <iconify-icon
+              icon="solar:alt-arrow-down-linear"
+              width="24"
+              height="24"
+            ></iconify-icon>
+          </button>
+        </div>
+        <div id="header-logo">
+          <img src="assets/logo.svg" alt="인재의창 로고" id="app-logo" />
+        </div>
+      </header>
 
       <!-- Current Track Display -->
       <div id="current-track-bar">
@@ -69,21 +76,56 @@
 
         <div class="nav-section">
           <div class="nav-section-title">노래</div>
-          <select id="song-select" class="song-select-panel"></select>
+          <div class="song-select-row">
+            <select id="song-select" class="song-select-panel"></select>
+            <button
+              id="load-song-btn"
+              class="load-song-btn"
+              title="선택한 곡 재생"
+            >
+              <iconify-icon
+                icon="solar:play-bold"
+                width="18"
+                height="18"
+              ></iconify-icon>
+              재생
+            </button>
+          </div>
         </div>
       </div>
 
-      <!-- Content Area -->
+      <!-- Content Area (3D Flip Container) -->
       <div id="content-area">
-        <div id="stage-container">
-          <div id="math-area">
-            <div id="emoji-area"></div>
-            <div id="math-display">
-              <span class="placeholder">수식이 여기에 표시됩니다</span>
+        <div id="record-card-container">
+          <div id="record-card">
+            <!-- FRONT: Vinyl Record -->
+            <div class="card-face card-front">
+              <div id="vinyl-record">
+                <div class="vinyl-grooves"></div>
+                <div class="vinyl-label"></div>
+              </div>
+            </div>
+
+            <!-- BACK: Math & Lyrics -->
+            <div class="card-face card-back">
+              <div id="math-area">
+                <div id="math-display">
+                  <span class="placeholder">수식이 여기에 표시됩니다</span>
+                </div>
+              </div>
+              <div id="lyrics-area">
+                <div id="lyrics-display">곡을 선택하고 재생하세요.</div>
+              </div>
             </div>
           </div>
-          <div id="lyrics-area">
-            <div id="lyrics-display">준비 완료! 곡을 선택하고 재생하세요.</div>
+          <!-- Flip Hint Badge -->
+          <div id="flip-hint" class="flip-hint">
+            <iconify-icon
+              icon="solar:refresh-outline"
+              width="16"
+              height="16"
+            ></iconify-icon>
+            <span>탭하여 가사 보기</span>
           </div>
         </div>
       </div>
@@ -94,6 +136,13 @@
           <div class="meta-left">
             <div id="track-title">음원 미선택</div>
             <div id="track-artist">곡을 선택해주세요</div>
+          </div>
+          <div class="meta-right">
+            <iconify-icon
+              icon="solar:music-library-bold"
+              width="24"
+              height="24"
+            ></iconify-icon>
           </div>
         </div>
 
@@ -131,23 +180,23 @@
         </div>
 
         <div class="volume-row">
-          <span class="volume-icon">
+          <button id="mute-btn" class="volume-icon-btn" title="음소거">
             <iconify-icon
               icon="solar:volume-cross-bold"
               width="20"
               height="20"
             ></iconify-icon>
-          </span>
+          </button>
           <div id="volume-container">
             <div id="volume-bar"></div>
           </div>
-          <span class="volume-icon">
+          <button id="max-volume-btn" class="volume-icon-btn" title="최대 음량">
             <iconify-icon
               icon="solar:volume-loud-bold"
               width="20"
               height="20"
             ></iconify-icon>
-          </span>
+          </button>
         </div>
       </div>
     </div>
