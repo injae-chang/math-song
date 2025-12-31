@@ -374,46 +374,54 @@ body.dark-mode #content-area {
 }
 
 /* ===== Vinyl Record Container ===== */
+/* ===== Vinyl Record Container ===== */
 #record-card-container {
-  width: 340px;
-  height: 340px;
+  width: min(75vw, 320px);
+  aspect-ratio: 1;
   position: relative;
+  margin: 0 auto;
 }
 
 /* ===== Flip Hint Badge ===== */
+/* ===== Flip Hint Badge ===== */
 .flip-hint {
   position: absolute;
-  bottom: -10px;
+  bottom: 25px; /* Moved inside the record */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   align-items: center;
   gap: 4px;
-  padding: 8px 14px;
+  padding: 6px 12px;
   min-width: auto;
   justify-content: center;
-  background: rgba(0, 0, 0, 0.06);
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
   border-radius: 20px;
   font-size: 11px;
-  font-weight: 500;
-  color: var(--text-secondary);
+  font-weight: 600;
+  color: #1a1a1a;
   cursor: pointer;
+  z-index: 10;
   transition: all var(--transition-smooth);
   animation: hintPulse 2.5s ease-in-out infinite;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 body.dark-mode .flip-hint {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.7);
+  background: rgba(0, 0, 0, 0.5);
+  color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
 .flip-hint:hover {
-  background: rgba(0, 0, 0, 0.1);
   transform: translateX(-50%) scale(1.05);
+  background: rgba(255, 255, 255, 0.6);
 }
 
 body.dark-mode .flip-hint:hover {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.7);
 }
 
 .flip-hint iconify-icon {
@@ -739,11 +747,11 @@ body.dark-mode #controls {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 6px;
+  gap: 4px;
   text-align: center;
   cursor: pointer;
-  padding: 16px 24px;
-  width: 340px; /* Default based on record-card-container */
+  padding: 12px 20px;
+  width: min(75vw, 320px); /* Fluid width matching container */
   max-width: 100%;
   margin: 0 auto;
   border-radius: var(--radius-lg);
@@ -751,18 +759,6 @@ body.dark-mode #controls {
   box-shadow: var(--shadow-neu-sm);
   transition: all var(--transition-fast);
   position: relative;
-}
-
-@media (max-width: 375px) {
-  .player-meta {
-    width: 300px;
-  }
-}
-
-@media (min-width: 768px) {
-  .player-meta {
-    width: 380px;
-  }
 }
 
 .meta-right {
@@ -806,7 +802,7 @@ body.dark-mode .player-meta:hover {
 
 #track-title {
   font-family: var(--font-display);
-  font-size: 1.75rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--text-primary);
   letter-spacing: -0.03em;
@@ -815,7 +811,7 @@ body.dark-mode .player-meta:hover {
 }
 
 #track-artist {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 400;
   color: var(--text-secondary);
   letter-spacing: -0.01em;
@@ -842,7 +838,7 @@ body.dark-mode .player-meta:hover {
 #progress-container {
   width: 100%;
   height: 6px;
-  border-radius: 3px;
+  border-radius: 10px;
   background: var(--bg-main);
   box-shadow: var(--shadow-neu-inset);
   cursor: pointer;
@@ -864,7 +860,7 @@ body.dark-mode #progress-container {
   height: 100%;
   width: 0%;
   background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));
-  border-radius: 3px;
+  border-radius: 10px;
   position: relative;
   transition: width 0.1s linear, background var(--transition-smooth);
 }
@@ -1130,11 +1126,6 @@ body.dark-mode #volume-bar::after {
 
 /* ===== Responsive ===== */
 @media (max-width: 375px) {
-  #record-card-container {
-    width: 300px;
-    height: 300px;
-  }
-
   #track-title {
     font-size: 1.5rem;
   }
@@ -1150,11 +1141,6 @@ body.dark-mode #volume-bar::after {
 }
 
 @media (min-width: 768px) {
-  #record-card-container {
-    width: 380px;
-    height: 380px;
-  }
-
   #track-title {
     font-size: 2rem;
   }
