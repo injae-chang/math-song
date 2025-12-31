@@ -571,6 +571,34 @@ body {
   outline-offset: 2px;
 }
 
+/* Iconify icon styling */
+iconify-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+#toggle-btn iconify-icon {
+  transition: transform 0.2s ease;
+}
+
+#toggle-btn.expanded iconify-icon {
+  transform: rotate(180deg);
+}
+
+.play-btn iconify-icon {
+  color: inherit;
+}
+
+.icon-btn iconify-icon {
+  color: inherit;
+}
+
+.volume-icon iconify-icon {
+  color: var(--muted);
+}
+
 /* Highlight animation for nav panel */
 #nav-panel.highlight {
   animation: panelHighlight 0.8s ease-out;

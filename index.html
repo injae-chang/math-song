@@ -21,6 +21,7 @@
       defer
       src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"
     ></script>
+    <script src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
     <script defer src="script.js"></script>
   </head>
 
@@ -28,7 +29,13 @@
     <div id="mv-container">
       <!-- Collapse/Expand Toggle -->
       <div id="nav-toggle">
-        <button id="toggle-btn" title="곡 선택 열기/닫기">⌄</button>
+        <button id="toggle-btn" title="곡 선택 열기/닫기">
+          <iconify-icon
+            icon="solar:alt-arrow-down-linear"
+            width="24"
+            height="24"
+          ></iconify-icon>
+        </button>
       </div>
 
       <!-- Current Track Display -->
@@ -99,19 +106,48 @@
         </div>
 
         <div class="player-actions">
-          <button id="prev-btn" class="icon-btn" title="이전 곡">⏮</button>
-          <button id="play-btn" class="play-btn" title="재생/일시정지 (Space)">
-            ▶
+          <button id="prev-btn" class="icon-btn" title="이전 곡">
+            <iconify-icon
+              icon="solar:skip-previous-bold"
+              width="28"
+              height="28"
+            ></iconify-icon>
           </button>
-          <button id="next-btn" class="icon-btn" title="다음 곡">⏭</button>
+          <button id="play-btn" class="play-btn" title="재생/일시정지 (Space)">
+            <iconify-icon
+              id="play-icon"
+              icon="solar:play-bold"
+              width="32"
+              height="32"
+            ></iconify-icon>
+          </button>
+          <button id="next-btn" class="icon-btn" title="다음 곡">
+            <iconify-icon
+              icon="solar:skip-next-bold"
+              width="28"
+              height="28"
+            ></iconify-icon>
+          </button>
         </div>
 
         <div class="volume-row">
-          <span class="volume-icon">🔈</span>
+          <span class="volume-icon">
+            <iconify-icon
+              icon="solar:volume-cross-bold"
+              width="20"
+              height="20"
+            ></iconify-icon>
+          </span>
           <div id="volume-container">
             <div id="volume-bar"></div>
           </div>
-          <span class="volume-icon">🔊</span>
+          <span class="volume-icon">
+            <iconify-icon
+              icon="solar:volume-loud-bold"
+              width="20"
+              height="20"
+            ></iconify-icon>
+          </span>
         </div>
       </div>
     </div>

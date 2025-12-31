@@ -82,7 +82,13 @@
   }
 
   function setPlayButtonUI(isPlaying) {
-    els.playBtn.textContent = isPlaying ? '⏸' : '▶';
+    const playIcon = document.getElementById('play-icon');
+    if (playIcon) {
+      playIcon.setAttribute(
+        'icon',
+        isPlaying ? 'solar:pause-bold' : 'solar:play-bold'
+      );
+    }
     els.container?.classList.toggle('is-playing', isPlaying);
   }
 
