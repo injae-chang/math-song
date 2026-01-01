@@ -29,7 +29,7 @@
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.12);
   --shadow-lg: 0 20px 60px rgba(0, 0, 0, 0.2);
-  --shadow-vinyl: 0 25px 80px rgba(0, 0, 0, 0.35);
+  --shadow-vinyl: 0 15px 40px rgba(0, 0, 0, 0.35);
 
   --font-system: 'Pretendard Variable', -apple-system, BlinkMacSystemFont,
     'SF Pro Display', 'Helvetica Neue', sans-serif;
@@ -138,7 +138,7 @@ body.dark-mode #app-logo {
 }
 
 body.dark-mode #toggle-btn {
-  background: rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.1);
   color: #ffffff;
 }
 
@@ -358,13 +358,14 @@ body.dark-mode .song-select-panel {
 }
 
 /* ===== Content Area ===== */
+/* ===== Content Area ===== */
 #content-area {
   flex: 1;
   display: flex;
-  align-items: flex-start;
+  align-items: center; /* Center content vertically */
   justify-content: center;
   perspective: 1500px;
-  padding: 20px 24px 0;
+  padding: 10px 24px; /* Reduced vertical padding */
   background: var(--bg-main);
   transition: background var(--transition-smooth);
 }
@@ -377,6 +378,8 @@ body.dark-mode #content-area {
 /* ===== Vinyl Record Container ===== */
 #record-card-container {
   width: min(75vw, 320px);
+  max-width: 50vh; /* Limit relative to viewport height */
+  max-height: 50vh; /* Prevent taking too much vertical space */
   aspect-ratio: 1;
   position: relative;
   margin: 0 auto;
@@ -724,22 +727,33 @@ body.dark-mode #lyrics-display {
 }
 
 /* ===== Player Controls ===== */
+/* ===== Player Controls ===== */
 #controls {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0 28px max(32px, var(--safe-area-bottom));
-  background: var(--bg-main);
+  position: relative;
+  padding: 32px 28px max(24px, var(--safe-area-bottom));
+  background: rgba(228, 233, 242, 0.85); /* Semi-transparent base */
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   z-index: 50;
   display: flex;
   flex-direction: column;
   gap: 20px;
   transition: background var(--transition-smooth);
+  flex-shrink: 0;
+
+  /* Rounded Top Panel Design */
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+
+  /* Soft Shadow & Border for blending */
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(255, 255, 255, 0.5);
 }
 
 body.dark-mode #controls {
-  background: var(--bg-dark);
+  background: rgba(26, 29, 46, 0.85);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.2);
 }
 
 /* ===== Track Meta ===== */
@@ -837,17 +851,13 @@ body.dark-mode .player-meta:hover {
 
 #progress-container {
   width: 100%;
-  height: 6px;
+  height: 10px; /* Increased actual height for better usability */
   border-radius: 10px;
   background: var(--bg-main);
   box-shadow: var(--shadow-neu-inset);
   cursor: pointer;
   position: relative;
   transition: background var(--transition-smooth);
-  /* Expand clickable area with padding */
-  padding: 12px 0;
-  margin: -12px 0;
-  background-clip: content-box;
 }
 
 body.dark-mode #progress-container {
@@ -863,6 +873,7 @@ body.dark-mode #progress-container {
   border-radius: 10px;
   position: relative;
   transition: width 0.1s linear, background var(--transition-smooth);
+  will-change: width;
 }
 
 body.dark-mode #progress-bar {

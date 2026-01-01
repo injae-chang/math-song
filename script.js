@@ -56,6 +56,7 @@
     semester: 1,
     navOpen: false,
     currentTrackIndex: 0,
+    isDragging: false,
   };
 
   function fmtTime(sec) {
@@ -79,8 +80,7 @@
 
   function resetDisplay() {
     els.lyrics.textContent = '준비 완료!\n곡을 선택하고 재생하세요.';
-    els.math.innerHTML =
-      '<span class="placeholder">수식이 여기에 표시됩니다</span>';
+    els.math.innerHTML = '';
     els.math.classList.remove('active');
     state.currentIdx = -1;
   }
@@ -109,6 +109,7 @@
   }
 
   function updateTimeReadout() {
+    if (state.isDragging) return;
     els.timeCurrent.textContent = fmtTime(els.audio.currentTime);
     els.timeDuration.textContent = fmtTime(els.audio.duration);
   }
@@ -143,8 +144,7 @@
       els.math.classList.add('active');
       animateEnter(els.math);
     } else {
-      els.math.innerHTML =
-        '<span class="placeholder">수식이 여기에 표시됩니다</span>';
+      els.math.innerHTML = '';
       els.math.classList.remove('active');
     }
   }
@@ -176,9 +176,14 @@
 
   function tick() {
     if (!state.isPlaying) return;
-    updateProgressBar(els.audio.currentTime, els.audio.duration);
-    updateContent(els.audio.currentTime);
-    updateTimeReadout();
+
+    // 드래그 중이 아닐 때만 UI 업데이트 (드래그 중에는 드래그 핸들러가 UI 제어)
+    if (!state.isDragging) {
+      updateProgressBar(els.audio.currentTime, els.audio.duration);
+      updateContent(els.audio.currentTime);
+      updateTimeReadout();
+    }
+
     if (els.audio.ended) {
       stop();
       return;
@@ -563,25 +568,120 @@
     els.prevBtn.addEventListener('click', playPrevTrack);
     els.nextBtn.addEventListener('click', playNextTrack);
 
-    els.progressContainer.addEventListener('click', (e) => {
+    // --- Progress Bar Scrubbing ---
+    // --- Progress Bar Scrubbing ---
+    let dragRect = null;
+
+    const handleScrub = (clientX) => {
+      const rect = dragRect || els.progressContainer.getBoundingClientRect();
       const dur = els.audio.duration;
-      if (!Number.isFinite(dur) || dur <= 0) return;
-      const rect = els.progressContainer.getBoundingClientRect();
-      seekTo(
-        Math.max(0, Math.min(dur, ((e.clientX - rect.left) / rect.width) * dur))
-      );
+      if (!Number.isFinite(dur) || dur <= 0) return 0;
+      let ratio = (clientX - rect.left) / rect.width;
+      ratio = Math.max(0, Math.min(1, ratio));
+      return ratio * dur;
+    };
+
+    const updateScrubUI = (time) => {
+      updateProgressBar(time, els.audio.duration);
+      els.timeCurrent.textContent = fmtTime(time);
+    };
+
+    const onDragStart = (e) => {
+      state.isDragging = true;
+      els.progressBar.style.transition = 'none'; // Disable transition for instant follow
+      dragRect = els.progressContainer.getBoundingClientRect(); // Cache rect to prevent jitter
+
+      const clientX = e.type.includes('touch')
+        ? e.touches[0].clientX
+        : e.clientX;
+      const time = handleScrub(clientX);
+      updateScrubUI(time);
+    };
+
+    const onDragMove = (e) => {
+      if (!state.isDragging) return;
+      if (e.cancelable) e.preventDefault();
+      const clientX = e.type.includes('touch')
+        ? e.touches[0].clientX
+        : e.clientX;
+      const time = handleScrub(clientX);
+      updateScrubUI(time);
+    };
+
+    const onDragEnd = (e) => {
+      if (!state.isDragging) return;
+      state.isDragging = false;
+      dragRect = null; // Clear cached rect
+      els.progressBar.style.transition = ''; // Restore transition
+
+      const clientX = e.type.includes('touch')
+        ? e.changedTouches[0]
+          ? e.changedTouches[0].clientX
+          : 0
+        : e.clientX;
+      const time = handleScrub(clientX);
+      seekTo(time);
+    };
+
+    els.progressContainer.addEventListener('mousedown', onDragStart);
+    els.progressContainer.addEventListener('touchstart', onDragStart, {
+      passive: false,
     });
 
-    // Volume control
-    els.volumeContainer.addEventListener('click', (e) => {
+    document.addEventListener('mousemove', onDragMove);
+    document.addEventListener('touchmove', onDragMove, { passive: false });
+    document.addEventListener('mouseup', onDragEnd);
+    document.addEventListener('touchend', onDragEnd);
+
+    // --- Volume Bar Scrubbing (Draggable) ---
+    let volumeDragging = false;
+
+    const handleVolumeScrub = (clientX) => {
       const rect = els.volumeContainer.getBoundingClientRect();
-      const ratio = Math.max(
-        0,
-        Math.min(1, (e.clientX - rect.left) / rect.width)
-      );
+      let ratio = (clientX - rect.left) / rect.width;
+      ratio = Math.max(0, Math.min(1, ratio));
+      return ratio;
+    };
+
+    const onVolumeDragStart = (e) => {
+      volumeDragging = true;
+      els.volumeBar.style.transition = 'none';
+      const clientX = e.type.includes('touch')
+        ? e.touches[0].clientX
+        : e.clientX;
+      const ratio = handleVolumeScrub(clientX);
       els.audio.volume = ratio;
       updateVolumeBar();
+    };
+
+    const onVolumeDragMove = (e) => {
+      if (!volumeDragging) return;
+      if (e.cancelable) e.preventDefault();
+      const clientX = e.type.includes('touch')
+        ? e.touches[0].clientX
+        : e.clientX;
+      const ratio = handleVolumeScrub(clientX);
+      els.audio.volume = ratio;
+      updateVolumeBar();
+    };
+
+    const onVolumeDragEnd = () => {
+      if (!volumeDragging) return;
+      volumeDragging = false;
+      els.volumeBar.style.transition = '';
+    };
+
+    els.volumeContainer.addEventListener('mousedown', onVolumeDragStart);
+    els.volumeContainer.addEventListener('touchstart', onVolumeDragStart, {
+      passive: false,
     });
+
+    document.addEventListener('mousemove', onVolumeDragMove);
+    document.addEventListener('touchmove', onVolumeDragMove, {
+      passive: false,
+    });
+    document.addEventListener('mouseup', onVolumeDragEnd);
+    document.addEventListener('touchend', onVolumeDragEnd);
 
     // Mute button
     els.muteBtn.addEventListener('click', () => {
