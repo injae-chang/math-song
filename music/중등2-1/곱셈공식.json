@@ -27,7 +27,7 @@
     },
     {
       "time": 14,
-      "text": "의 전체 제곱은 이렇게",
+      "text": "전체 제곱은 이렇게",
       "mathLatex": "(a \\pm b)^2"
     },
     {
@@ -37,22 +37,17 @@
     },
     {
       "time": 18,
-      "text": "a 제곱 ± 2ab + b",
-      "mathLatex": "a^2 \\pm 2ab + b"
-    },
-    {
-      "time": 25,
-      "text": "제곱",
+      "text": "⬆️ 완전제곱식 ⬆️",
       "mathLatex": "(a \\pm b)^2 = a^2 \\pm 2ab + b^2"
     },
     {
       "time": 26,
-      "text": "둘째, 합차공식 (a + b)",
-      "mathLatex": "a + b"
+      "text": "둘째, 합차공식 (a + b)(a - b)",
+      "mathLatex": "(a + b)(a - b)"
     },
     {
       "time": 30,
-      "text": "(a - b) 둘이 만나면 바로 이거",
+      "text": "둘이 만나면 바로 이거",
       "mathLatex": "(a + b)(a - b)"
     },
     {

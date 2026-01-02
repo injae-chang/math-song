@@ -8,11 +8,8 @@
     중등: [1, 2, 3],
   };
 
-  const TRACK_REGISTRY = {
-    '중등1-1': [{ title: '피타고라스1', jsonFile: '피타고라스1.json' }],
-    '중등2-1': [{ title: '곱셈공식', jsonFile: '곱셈공식.json' }],
-    '중등3-1': [{ title: '근의공식', jsonFile: '근의공식.json' }],
-  };
+  // 동적으로 manifest.json에서 로드됨
+  let TRACK_REGISTRY = {};
 
   const els = {
     container: $('mv-container'),
@@ -58,6 +55,19 @@
     currentTrackIndex: 0,
     isDragging: false,
   };
+
+  // manifest.json에서 트랙 목록을 불러옴
+  async function fetchManifest() {
+    try {
+      const res = await fetch('music/manifest.json');
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      TRACK_REGISTRY = await res.json();
+      console.log('Manifest loaded:', Object.keys(TRACK_REGISTRY));
+    } catch (e) {
+      console.error('Failed to load manifest:', e);
+      TRACK_REGISTRY = {};
+    }
+  }
 
   function fmtTime(sec) {
     if (!Number.isFinite(sec) || sec < 0) return '--:--';
@@ -136,7 +146,11 @@
   }
 
   function renderSlide(slide) {
-    els.lyrics.textContent = slide.text;
+    // 이스케이프 문자 처리 (\n → 줄바꿈, \t → 탭 등)
+    const processedText = slide.text
+      .replace(/\\n/g, '\n')
+      .replace(/\\t/g, '\t');
+    els.lyrics.textContent = processedText;
     animateEnter(els.lyrics);
 
     if (slide.mathLatex) {
@@ -485,7 +499,10 @@
     }
   }
 
-  function init() {
+  async function init() {
+    // manifest.json에서 트랙 목록 로드
+    await fetchManifest();
+
     resetDisplay();
     setPlayButtonUI(false);
     updateTimeReadout();

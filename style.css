@@ -731,6 +731,7 @@ body.dark-mode #math-display .katex {
   text-align: center;
   letter-spacing: -0.02em;
   word-break: keep-all;
+  white-space: pre-line; /* 줄바꿈(\n) 적용 */
 }
 
 body.dark-mode #lyrics-display {

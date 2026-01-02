@@ -4,31 +4,82 @@
   "artist": "인재의창",
   "audioFile": "근의공식.mp3",
   "slides": [
-    { "time": 0, "text": "이차방정식을 풀어보자!", "emoji": "🔢" },
     {
-      "time": 4,
-      "text": "ax² + bx + c = 0",
-      "emoji": "📝",
-      "mathLatex": "ax^2 + bx + c = 0"
+      "time": 0,
+      "text": "이차방정식 답이 안 보일 때\n이 주문을 외워봐"
     },
-    { "time": 10, "text": "근의 공식 나가신다!", "emoji": "🎤" },
-    { "time": 14, "text": "x = -b", "emoji": "1️⃣" },
     {
-      "time": 18,
-      "text": "± 루트 b² - 4ac",
-      "emoji": "2️⃣",
-      "mathLatex": "x = \\frac{-b \\pm \\sqrt{b^2-4ac}}{2a}"
+      "time": 12,
+      "text": "인수분해가 안 돼서"
     },
-    { "time": 25, "text": "나누기 2a!", "emoji": "3️⃣" },
     {
-      "time": 30,
-      "text": "판별식 D = b² - 4ac",
-      "emoji": "💡",
+      "time": 16,
+      "text": "고민하지 마 숫자만 대입해"
+    },
+    {
+      "time": 19,
+      "text": "답으로 가는 길이 열리니까"
+    },
+    {
+      "time": 22,
+      "text": "딱 한 번만 들으면 잊을 수 없어 준비됐지"
+    },
+    {
+      "time": 26,
+      "text": "시작할게"
+    },
+    {
+      "time": 27,
+      "text": "⬆️ 근의 공식 ⬆️",
+      "mathLatex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"
+    },
+    {
+      "time": 44,
+      "text": "⬆️ 근의 공식 ⬆️",
+      "mathLatex": "x = \\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"
+    },
+    {
+      "time": 50,
+      "text": "이게 바로 근의 공식"
+    },
+    {
+      "time": 51,
+      "text": "분모에는 2a, 분자에는"
+    },
+    {
+      "time": 54,
+      "text": "마이너스 b, 그 뒤에"
+    },
+    {
+      "time": 56,
+      "text": "루트 씌워 판별식을 넣어봐"
+    },
+    {
+      "time": 59,
+      "text": "⬆️ 판별식 ⬆️",
       "mathLatex": "D = b^2 - 4ac"
     },
-    { "time": 38, "text": "D > 0 이면 서로 다른 두 실근!", "emoji": "✌️" },
-    { "time": 44, "text": "D = 0 이면 중근!", "emoji": "1️⃣" },
-    { "time": 48, "text": "D < 0 이면 실근 없음!", "emoji": "❌" },
-    { "time": 53, "text": "근의공식! 근의공식!", "emoji": "🏁" }
+    {
+      "time": 67,
+      "text": "다시 한번"
+    },
+    {
+      "time": 69,
+      "text": "⬆️ 근의 공식 ⬆️",
+      "mathLatex": "\\frac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}"
+    },
+    {
+      "time": 103,
+      "text": "답이 나왔어"
+    },
+    {
+      "time": 106,
+      "text": "b 제곱 빼기 4ac",
+      "mathLatex": "b^2 - 4ac"
+    },
+    {
+      "time": 115,
+      "text": "완벽해"
+    }
   ]
 }
