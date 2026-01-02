@@ -683,17 +683,29 @@
     document.addEventListener('mouseup', onVolumeDragEnd);
     document.addEventListener('touchend', onVolumeDragEnd);
 
-    // Mute button
+    // Mute button - toggle mute/unmute
+    let savedVolume = 1;
     els.muteBtn.addEventListener('click', () => {
-      els.audio.volume = 0;
+      if (els.audio.muted) {
+        els.audio.muted = false;
+        els.audio.volume = savedVolume || 1;
+        els.muteBtn
+          .querySelector('iconify-icon')
+          ?.setAttribute('icon', 'solar:volume-cross-bold');
+      } else {
+        savedVolume = els.audio.volume || 1;
+        els.audio.muted = true;
+        els.muteBtn
+          .querySelector('iconify-icon')
+          ?.setAttribute('icon', 'solar:volume-loud-bold');
+      }
       updateVolumeBar();
     });
 
-    // Flip interaction with dark mode toggle
+    // Flip interaction
     if (els.recordCard) {
       els.recordCard.addEventListener('click', () => {
         els.recordCard.classList.toggle('flipped');
-        document.body.classList.toggle('dark-mode');
       });
     }
 
@@ -702,7 +714,6 @@
       els.flipHint.addEventListener('click', () => {
         if (els.recordCard) {
           els.recordCard.classList.toggle('flipped');
-          document.body.classList.toggle('dark-mode');
         }
       });
     }

@@ -98,15 +98,24 @@
       <div id="content-area">
         <div id="record-card-container">
           <div id="record-card">
-            <!-- FRONT: Vinyl Record -->
+            <!-- BACK (when flipped): Vinyl Record -->
             <div class="card-face card-front">
               <div id="vinyl-record">
                 <div class="vinyl-grooves"></div>
                 <div class="vinyl-label"></div>
               </div>
+              <!-- Flip Hint Badge -->
+              <div id="flip-hint" class="flip-hint">
+                <iconify-icon
+                  icon="solar:refresh-outline"
+                  width="16"
+                  height="16"
+                ></iconify-icon>
+                <span>탭하여 가사 보기</span>
+              </div>
             </div>
 
-            <!-- BACK: Math & Lyrics -->
+            <!-- FRONT: Math & Lyrics -->
             <div class="card-face card-back">
               <div id="math-area">
                 <div id="math-display"></div>
@@ -115,15 +124,6 @@
                 <div id="lyrics-display">곡을 선택하고 재생하세요.</div>
               </div>
             </div>
-          </div>
-          <!-- Flip Hint Badge -->
-          <div id="flip-hint" class="flip-hint">
-            <iconify-icon
-              icon="solar:refresh-outline"
-              width="16"
-              height="16"
-            ></iconify-icon>
-            <span>탭하여 가사 보기</span>
           </div>
         </div>
       </div>
@@ -195,6 +195,10 @@
               height="20"
             ></iconify-icon>
           </button>
+        </div>
+
+        <div class="volume-mobile-notice">
+          📱 음량은 기기의 볼륨 버튼으로 조절해주세요.
         </div>
       </div>
     </div>
