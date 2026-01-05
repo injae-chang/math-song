@@ -37,7 +37,7 @@
     },
     {
       "time": 18,
-      "text": "⬆️ 완전제곱식 ⬆️",
+      "text": "🎶",
       "mathLatex": "(a \\pm b)^2 = a^2 \\pm 2ab + b^2"
     },
     {
@@ -78,62 +78,23 @@
       "text": "더 올려보자"
     },
     {
-      "time": 49,
-      "text": "a 제곱 +",
-      "mathLatex": "a^2 +"
-    },
-    {
       "time": 51,
-      "text": "b 제곱은 (a ± b)",
-      "mathLatex": "a^2 + b^2 = (a \\pm b)"
-    },
-    {
-      "time": 57,
-      "text": "의 전체 제곱 ∓",
-      "mathLatex": "(a \\pm b)^2 \\mp"
-    },
-    {
-      "time": 60,
-      "text": "2ab",
+      "text": "🎶",
       "mathLatex": "a^2 + b^2 = (a \\pm b)^2 \\mp 2ab"
     },
-    {
-      "time": 62,
-      "text": "(a + b)",
-      "mathLatex": "a + b"
-    },
+
     {
       "time": 63,
-      "text": "의 전체 제곱은 (a -",
-      "mathLatex": "(a + b)^2 = (a -"
-    },
-    {
-      "time": 67,
-      "text": "b)의 전체 제곱",
-      "mathLatex": "(a + b)^2 = (a - b)^2"
-    },
-    {
-      "time": 68,
-      "text": "+ 4ab",
+      "text": "🎶",
       "mathLatex": "(a + b)^2 = (a - b)^2 + 4ab"
     },
     {
       "time": 70,
-      "text": "(a - b)",
-      "mathLatex": "a - b"
-    },
-    {
-      "time": 72,
-      "text": "의 전체 제곱은 (a + b)",
-      "mathLatex": "(a - b)^2 = (a + b)"
-    },
-    {
-      "time": 75,
-      "text": "의 전체 제곱 - 4ab",
+      "text": "🎶",
       "mathLatex": "(a - b)^2 = (a + b)^2 - 4ab"
     },
     {
-      "time": 78,
+      "time": 79,
       "text": "복잡한 계산, 한 번에 해결"
     },
     {
@@ -145,37 +106,23 @@
       "text": "필수계산 기술, 곱셈공식"
     },
     {
-      "time": 92,
-      "text": "곱셈공식"
+      "time": 90,
+      "text": "곱셈공시~이이익~🎶"
     },
     {
       "time": 95,
-      "text": "둘째, 합차공식 (a",
-      "mathLatex": "a"
-    },
-    {
-      "time": 97,
-      "text": "+ b) (a -",
-      "mathLatex": "(a+b)(a-"
-    },
-    {
-      "time": 99,
-      "text": "b) 둘이 만나면 바로 이거",
+      "text": "둘째, 합차공식 (a+b)(a-b)",
       "mathLatex": "(a+b)(a-b)"
     },
     {
-      "time": 101,
-      "text": "a 제곱",
-      "mathLatex": "a^2"
+      "time": 98,
+      "text": "둘이 만나면 바로 이거",
+      "mathLatex": "(a+b)(a-b)"
     },
+
     {
       "time": 102,
-      "text": "a 제곱 -",
-      "mathLatex": "a^2 -"
-    },
-    {
-      "time": 104,
-      "text": "b 제곱",
+      "text": "a 제곱 - b 제곱",
       "mathLatex": "(a+b)(a-b) = a^2 - b^2"
     },
     {
@@ -191,63 +138,23 @@
       "text": "더 올려보자"
     },
     {
-      "time": 117,
-      "text": "a 제곱 +",
-      "mathLatex": "a^2 +"
-    },
-    {
-      "time": 119,
-      "text": "b 제곱은 (a ± b)",
+      "time": 118,
+      "text": "a 제곱 + b 제곱은",
       "mathLatex": "a^2 + b^2 = (a \\pm b)"
     },
     {
-      "time": 125,
-      "text": "의 전체 제곱 ∓",
-      "mathLatex": "(a \\pm b)^2 \\mp"
-    },
-    {
-      "time": 128,
-      "text": "2ab",
+      "time": 121,
+      "text": "🎶",
       "mathLatex": "a^2 + b^2 = (a \\pm b)^2 \\mp 2ab"
     },
     {
-      "time": 130,
-      "text": "(a + b)",
-      "mathLatex": "a + b"
-    },
-    {
-      "time": 132,
-      "text": "의 전체 제곱은 (a",
-      "mathLatex": "(a + b)^2 = (a"
-    },
-    {
-      "time": 134,
-      "text": "- b)",
-      "mathLatex": "- b)"
-    },
-    {
-      "time": 135,
-      "text": "의 전체 제곱",
-      "mathLatex": "(a + b)^2 = (a - b)^2"
-    },
-    {
-      "time": 136,
-      "text": "+ 4ab",
+      "time": 131,
+      "text": "🎶",
       "mathLatex": "(a + b)^2 = (a - b)^2 + 4ab"
     },
     {
-      "time": 138,
-      "text": "(a - b)",
-      "mathLatex": "a - b"
-    },
-    {
-      "time": 140,
-      "text": "의 전체 제곱은 (a + b)",
-      "mathLatex": "(a - b)^2 = (a + b)"
-    },
-    {
-      "time": 143,
-      "text": "의 전체 제곱 - 4ab",
+      "time": 139,
+      "text": "🎶",
       "mathLatex": "(a - b)^2 = (a + b)^2 - 4ab"
     },
     {
@@ -259,12 +166,16 @@
       "text": "식의 구조를 한 눈에 딱"
     },
     {
-      "time": 153,
+      "time": 154,
       "text": "필수계산 기술, 곱셈공식"
     },
     {
       "time": 157,
       "text": "곱셈공식"
+    },
+    {
+      "time": 159,
+      "text": "곱셈공식~이~익~🎶"
     }
   ]
 }
